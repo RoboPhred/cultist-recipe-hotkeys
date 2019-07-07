@@ -48,7 +48,7 @@ namespace CultistRecipeHotkeys
 
         void Start()
         {
-            this.Logger.LogInfo("CultistHotbar initialized.");
+            this.Logger.LogInfo("CultistRecipeHotkeys initialized.");
         }
 
         void Update()
