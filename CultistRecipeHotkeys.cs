@@ -10,7 +10,7 @@ using UnityEngine;
 
 namespace CultistRecipeHotkeys
 {
-    [BepInEx.BepInPlugin("net.robophreddev.CultistSimulator.CultistRecipeHotkeys", "CultistRecipeHotkeys", "0.0.1")]
+    [BepInEx.BepInPlugin("net.robophreddev.CultistSimulator.CultistRecipeHotkeys", "CultistRecipeHotkeys", "0.0.2")]
     public class CultistRecipeHotkeysMod : BepInEx.BaseUnityPlugin
     {
         readonly KeyCode[] RecipeKeys = new KeyCode[] {
