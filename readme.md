@@ -9,15 +9,19 @@ Download the latest release [here](https://github.com/RoboPhred/cultist-recipe-h
 
 To store a recipe, open a situation window and arrange the cards how you want them. Then, press Ctrl+F1 to Ctrl+F12 to save this combination.
 
-When the situation is idle, you can press the corresponding function key to open the window and restore the cards to how you saved them.
+When the situation is idle, you can press the corresponding function key to immediately start the situation operating with those cards.
 
-If you want to immediately start the situation with your saved cards, hold Shift when pressing the function key. This will populate the window
-with the cards you specified and attempt to start the situation. The window will open only if it is unsuccessful at starting.
+If the game is unsuccessful at starting your recipe, the sitation window will open automatically.
 Note that it may successfully start without all of the cards in place, if the recipe allows for it. This is useful in cases such as Painting,
 where not all of the "Art or Bread" cards are required.
 
+If you want to restore the cards without starting the situation, use Shift+F1 to Shift+F12. This will populate the window
+with the cards you specified and attempt to start the situation.
+
 At the moment, this mod does not support storing ongoing actions. If your recipe requires additional cards to be added after starting, you
 must add those cards yourself.
+
+You can change the hotkeys hotkeys if you prefer different keys. See [configuration](#configuration).
 
 ## Installation
 
@@ -26,6 +30,11 @@ This mod uses BepInEx 5.2.
 - Install [version 5.2](https://github.com/BepInEx/BepInEx/releases/tag/v5.2) or later by extracting the zip file into your Cultist Simulator install location
 - Run the game once, to let BepInEx create its folder structure.
 - Place the cultist-recipe-hotkeys.dll file from the download into `Cultist Sumulator/BepInEx/Plugins`
+
+## Configuration
+
+The hotkeys used to learn, restore, and execute recipes can be modified. After running the mod once, look in `Cultist Simulator/BepInEx/Config` for the config file
+`net.robophreddev.CultistSimulator.CultistRecipeHotkeys.cfg`. Inside you will find the bindings. A list of valid keys can be found [here](https://docs.unity3d.com/ScriptReference/KeyCode.html).
 
 ### Troubleshooting
 

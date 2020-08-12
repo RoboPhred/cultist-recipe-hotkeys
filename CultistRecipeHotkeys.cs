@@ -1,32 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Assets.Core.Entities;
 using Assets.Core.Interfaces;
 using Assets.CS.TabletopUI;
 using Assets.TabletopUi;
+using BepInEx.Configuration;
 using TabletopUi.Scripts.Interfaces;
 using UnityEngine;
 
 namespace CultistRecipeHotkeys
 {
-    [BepInEx.BepInPlugin("net.robophreddev.CultistSimulator.CultistRecipeHotkeys", "CultistRecipeHotkeys", "0.0.2")]
+    [BepInEx.BepInPlugin("net.robophreddev.CultistSimulator.CultistRecipeHotkeys", "CultistRecipeHotkeys", "1.0.0")]
     public class CultistRecipeHotkeysMod : BepInEx.BaseUnityPlugin
     {
-        readonly KeyCode[] RecipeKeys = new KeyCode[] {
-            KeyCode.F1,
-            KeyCode.F2,
-            KeyCode.F3,
-            KeyCode.F4,
-            KeyCode.F5,
-            KeyCode.F6,
-            KeyCode.F7,
-            KeyCode.F8,
-            KeyCode.F9,
-            KeyCode.F10,
-            KeyCode.F11,
-            KeyCode.F12,
-        };
+        private List<ConfigEntry<KeyboardShortcut>> ExecuteRecipeHotkeys = new List<ConfigEntry<KeyboardShortcut>>();
+        private List<ConfigEntry<KeyboardShortcut>> RestoreRecipeHotkeys = new List<ConfigEntry<KeyboardShortcut>>();
+        private List<ConfigEntry<KeyboardShortcut>> LearnRecipeHotkeys = new List<ConfigEntry<KeyboardShortcut>>();
 
         readonly Dictionary<int, RecipeConfig> RecipesByHotkeyIndex = new Dictionary<int, RecipeConfig>();
 
@@ -48,28 +39,36 @@ namespace CultistRecipeHotkeys
 
         void Start()
         {
+            for (var i = 0; i <= 11; i++)
+            {
+                ExecuteRecipeHotkeys.Add(Config.Bind(new ConfigDefinition("Hotkeys", "ExecuteRecipe" + i), new KeyboardShortcut(KeyCode.F1 + i)));
+                RestoreRecipeHotkeys.Add(Config.Bind(new ConfigDefinition("Hotkeys", "RestoreRecipe" + i), new KeyboardShortcut(KeyCode.F1 + i, KeyCode.LeftShift)));
+                LearnRecipeHotkeys.Add(Config.Bind(new ConfigDefinition("Hotkeys", "LearnRecipe" + i), new KeyboardShortcut(KeyCode.F1 + i, KeyCode.LeftControl)));
+            }
+
+            if (!File.Exists(Config.ConfigFilePath))
+            {
+                Config.Save();
+            }
+
             this.Logger.LogInfo("CultistRecipeHotkeys initialized.");
         }
 
         void Update()
         {
-            for (var i = 0; i < RecipeKeys.Length; i++)
+            for (var i = 0; i < this.ExecuteRecipeHotkeys.Count; i++)
             {
-                var key = RecipeKeys[i];
-                if (Input.GetKeyDown(key))
+                if (this.ExecuteRecipeHotkeys[i].Value.IsDown())
                 {
-                    var storeRecipe = Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl);
-                    if (storeRecipe)
-                    {
-                        this.StoreRecipe(i);
-                    }
-                    else
-                    {
-                        var executeRecipe = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
-                        this.RestoreRecipe(i, executeRecipe);
-                    }
-
-                    return;
+                    this.RestoreRecipe(i, true);
+                }
+                else if (this.RestoreRecipeHotkeys[i].Value.IsDown())
+                {
+                    this.RestoreRecipe(i, false);
+                }
+                else if (this.LearnRecipeHotkeys[i].Value.IsDown())
+                {
+                    this.StoreRecipe(i);
                 }
             }
         }
