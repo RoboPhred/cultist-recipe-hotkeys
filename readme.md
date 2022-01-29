@@ -5,6 +5,10 @@ This allows you to hotkey a combination of cards in a situation, and immediately
 
 Download the latest release [here](https://github.com/RoboPhred/cultist-recipe-hotkeys/releases/).
 
+## Supported Versions
+
+This mod supports Cultist Simulator `2021.1.b.2`.
+
 ## Usage
 
 To store a recipe, open a situation window and arrange the cards how you want them. Then, press Ctrl+F1 to Ctrl+F12 to save this combination.

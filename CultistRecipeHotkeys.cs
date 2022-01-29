@@ -7,12 +7,11 @@ using Assets.Core.Interfaces;
 using Assets.CS.TabletopUI;
 using Assets.TabletopUi;
 using BepInEx.Configuration;
-using TabletopUi.Scripts.Interfaces;
 using UnityEngine;
 
 namespace CultistRecipeHotkeys
 {
-    [BepInEx.BepInPlugin("net.robophreddev.CultistSimulator.CultistRecipeHotkeys", "CultistRecipeHotkeys", "1.0.0")]
+    [BepInEx.BepInPlugin("net.robophreddev.CultistSimulator.CultistRecipeHotkeys", "CultistRecipeHotkeys", "1.0.1")]
     public class CultistRecipeHotkeysMod : BepInEx.BaseUnityPlugin
     {
         private List<ConfigEntry<KeyboardShortcut>> ExecuteRecipeHotkeys = new List<ConfigEntry<KeyboardShortcut>>();
@@ -26,7 +25,7 @@ namespace CultistRecipeHotkeys
             get
             {
                 {
-                    var tabletopManager = (TabletopManager)Registry.Retrieve<ITabletopManager>();
+                    var tabletopManager = Registry.Get<TabletopManager>();
                     if (tabletopManager == null)
                     {
                         this.Logger.LogError("Could not fetch TabletopManager");
@@ -230,7 +229,7 @@ namespace CultistRecipeHotkeys
 
         SituationController GetSituation(string entityId)
         {
-            var situation = Registry.Retrieve<SituationsCatalogue>().GetRegisteredSituations().FirstOrDefault(x => x.situationToken.EntityId == entityId);
+            var situation = Registry.Get<SituationsCatalogue>().GetRegisteredSituations().FirstOrDefault(x => x.situationToken.EntityId == entityId);
             var token = situation.situationToken as SituationToken;
             if (token.Defunct || token.IsBeingAnimated)
             {
@@ -242,7 +241,7 @@ namespace CultistRecipeHotkeys
 
         SituationController GetOpenSituation()
         {
-            var situation = Registry.Retrieve<SituationsCatalogue>().GetOpenSituation();
+            var situation = Registry.Get<SituationsCatalogue>().GetOpenSituation();
             var token = situation.situationToken as SituationToken;
             if (token.Defunct || token.IsBeingAnimated)
             {
@@ -254,7 +253,7 @@ namespace CultistRecipeHotkeys
 
         void Notify(string title, string text)
         {
-            Registry.Retrieve<INotifier>().ShowNotificationWindow(title, text);
+            Registry.Get<INotifier>().ShowNotificationWindow(title, text, false);
         }
     }
 
