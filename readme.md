@@ -31,7 +31,7 @@ You can change the hotkeys hotkeys if you prefer different keys. See [configurat
 
 This mod uses BepInEx 5.2.
 
-- Install [version 5.2](https://github.com/BepInEx/BepInEx/releases/tag/v5.2) or later by extracting the zip file into your Cultist Simulator install location
+- Install BepInEx x86 [version 5.2](https://github.com/BepInEx/BepInEx/releases/tag/v5.2) or later by extracting the zip file into your Cultist Simulator install location
 - Run the game once, to let BepInEx create its folder structure.
 - Place the cultist-recipe-hotkeys.dll file from the download into `Cultist Sumulator/BepInEx/Plugins`
 
