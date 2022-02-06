@@ -20,7 +20,7 @@ Note that it may successfully start without all of the cards in place, if the re
 where not all of the "Art or Bread" cards are required.
 
 If you want to restore the cards without starting the situation, use Shift+F1 to Shift+F12. This will populate the window
-with the cards you specified and attempt to start the situation.
+with the cards you specified without starting it.
 
 At the moment, this mod does not support storing ongoing actions. If your recipe requires additional cards to be added after starting, you
 must add those cards yourself.
